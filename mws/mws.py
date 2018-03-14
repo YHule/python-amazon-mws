@@ -1268,7 +1268,7 @@ class Inventory(MWS):
     ]
 
     @utils.next_token_action('ListInventorySupply')
-    def list_inventory_supply(self, skus=(), datetime_=None,
+    def list_inventory_supply(self, skus=(), marketplaceid=None, datetime_=None,
                               response_group='Basic', next_token=None):
         """
         Returns information on available inventory
@@ -1277,6 +1277,7 @@ class Inventory(MWS):
         data = dict(Action='ListInventorySupply',
                     QueryStartDateTime=datetime_,
                     ResponseGroup=response_group,
+                    MarketplaceId=marketplaceid
                     )
         data.update(utils.enumerate_param('SellerSkus.member.', skus))
         return self.make_request(data, "POST")
